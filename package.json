@@ -5,14 +5,17 @@
   "main": "app.js",
   "scripts": {
     "test": "mocha",
-    "start": "nodemon --exec \"npm test\""
+    "start": "nodemon app.js",
+    "startOld": "nodemon --exec \"npm test\""
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/teerapat1739/Bot_E-commerce.git"
   },
   "comment": {
-    "//":["place your comment here"]
+    "//": [
+      "place your comment here"
+    ]
   },
   "author": "teerapat1739",
   "license": "ISC",
@@ -32,8 +35,10 @@
     "body-parser": "^1.18.2",
     "ejs": "^2.5.8",
     "express": "^4.16.3",
+    "mongoose": "^5.0.13",
     "nodemon": "^1.17.3",
     "now": "^10.2.2",
+    "serve-favicon": "^2.5.0",
     "winston": "^2.4.1"
   }
 }

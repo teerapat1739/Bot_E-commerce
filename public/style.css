@@ -1,0 +1,57 @@
+html,body{
+    background-color: #000018;
+}
+
+.jumbotron-fluid,.dropdown-menu,.dropdown-item,.navbar{
+    background-color: #000018;
+    color: orangered;
+    font-size: 4vmin;
+    font-weight: bold;
+}
+
+.display-4{
+    font-weight: bold;
+    font-size: 8vmin
+}
+h4{
+    color: white;
+    font-size: 4vmin;
+    border: 2px silid blue;
+    font-weight: bold;
+}
+p,label{
+    color:orangered;
+    font-size: 4vmin;
+    font-weight: bold;
+}
+span{
+    color:orangered;
+    font-size: 3vmin;
+    width: 40vmin;
+    word-wrap: break-word;
+}
+.btn{
+    color: white;
+    font-size: 4vmin;
+    cursor: pointer;
+    background-color: #000018;
+    border: 2px solid blue;
+    font-weight: bold;
+}
+input[type=search]{
+    width: 25%;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid blue;
+    background-color: #000018;
+    color: white
+}
+
+input[type=text],[type=file]{
+    width: 100%;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid blue;
+    background-color: #000018;
+    color: white
+}
