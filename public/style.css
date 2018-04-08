@@ -60,3 +60,8 @@ img{
     height: 45vmin;
     width: 45vmin;
 }
+
+input[type=text]:focus{
+    background-color: #000018;
+    color: white;
+}
