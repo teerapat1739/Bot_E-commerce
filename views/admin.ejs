@@ -28,7 +28,7 @@
                     </form>
                     <br>
                     <h4>
-                        <%= typeof msg != "undefined" ? msg : "" %></h4>
+                        <%= typeof msg != "undefined" ? msg : ""%></h4>
                     <label for="">ADD PRODUCT</label>
                 </div>
                 <div class="col-12 text-center">
@@ -43,15 +43,20 @@
                             <label for="">ADD PRICE</label>
                             <input type="text" class="form-control" name="price">
                             <label for="">ADD IMAGE</label><br>
-                            <label for="" class="btn btn-default">
+                            <label class="btn btn-default">
                                 <i class="fa fa-search" aria-hidden="true"></i>
-                                <input type="file" class="form-control" name="image" accept=".jpg, .jpeg, .png, .gif" hidden>
+                                <input type="file" class="form-control" name="image" accept=".jpg, .jpeg, .png, .gif" >
                             </label>
                         </div>
                         <button type="submit" class="btn btn-info">Submit</button><br><br>                   </form>
                 </div>
             </div>
     </div>
+    <script>
+        if(window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href)
+        }
+    </script>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
