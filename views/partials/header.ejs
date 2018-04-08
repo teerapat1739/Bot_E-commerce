@@ -14,14 +14,18 @@
                     <span class="sr-only">(current)</span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
+                    <% ctg.forEach(category => {%>
+                        <a class="dropdown-item" href="/navbar?name=<%= category.name %>">
+                            <%= category.name %>
+                        </a>
+                        <% }) %>
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span id="cart" class="badge badge-dark"></span></a>
+                <a class="nav-link" href="#">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    <span id="cart" class="badge badge-dark"></span>
+                </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/logout">Logout</a>
@@ -29,7 +33,9 @@
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-info my-2 my-sm-0" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+            <button class="btn btn-outline-info my-2 my-sm-0" type="submit">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
         </form>
     </div>
 </nav>

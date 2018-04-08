@@ -30,6 +30,17 @@ app.use(favicon(path.join(__dirname,'public', 'favicon.ico')))
 app.use(express.static(__dirname + '/public'))
 app.use(morgan('dev'))
 
+// ==============================NAVBAR
+app.use((req, res, next) => {
+    Category.find().then(data => {
+        res.locals.ctg = data
+        console.log(res.locals.ctg)
+        
+        next()
+    }, (e) => {throw new Error('Unable to find categories!')})
+})
+
+
 // ==============================USE Routes
 app.use(userRouter)
 app.use(adminRouter)

@@ -55,3 +55,8 @@ input[type=text],[type=file]{
     background-color: #000018;
     color: white
 }
+
+img{
+    height: 45vmin;
+    width: 45vmin;
+}
