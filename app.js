@@ -15,6 +15,7 @@ const adminRouter = require('./routes/admin')
 
 // ==============================MODELS
 const Category = require('./models/category')
+const Product = require('./models/product')
 
 
 // if you noticed some errors or misspellings during the lessons don't worry we will find and correct them together later in the coure
@@ -47,6 +48,11 @@ app.use(adminRouter)
 
 
 // ==============================ERRORS
+app.use(() => {
+    const err = new Error('Not Found')
+    err.status = 404
+    next(err)
+})
 app.use((err, req, res, next)=>{
     res.locals.error = req.app.get('env') === 'development'? err :{}
     res.status(err.status || 500)

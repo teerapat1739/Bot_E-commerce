@@ -3,6 +3,7 @@
 const router = require('express').Router()
 const logger = require('../log')
 const Category = require('../models/category')
+const Product = require('../models/product')
 
 
 router.get('/admin',(req, res) => {
@@ -18,6 +19,9 @@ router.post('/category', (req, res) => {
         throw new Error('Unable to save category')
     })
 })
+
+
+//upload file will use Multer module 
 
 
 module.exports = router
