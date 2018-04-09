@@ -6,6 +6,9 @@ const app = express()
 const favicon = require('serve-favicon')
 const path = require('path')
 const PORT = process.env.PORT || 3000
+const passport = require('passport')
+const session = require('express-session')
+const MongoStore = require('connect-mongo')(session)
 // ==============================CONNECT MONGOOSE
 const { mongoose } = require('./db/index')
 
@@ -33,6 +36,17 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 app.use(express.static(__dirname + '/public'))
 app.use(morgan('dev'))
 
+// ==============================SESSION
+app.use(session({
+    secret: 'secret',
+    saveUninitialized: false,
+    resave: false,
+    store: new MongoStore({ url: 'mongodb://localhost/e-commerce'})
+}))
+app.use(passport.initialize())
+app.use(passport.session())
+
+
 // ==============================NAVBAR
 app.use((req, res, next) => {
     Category.find().then(data => {
@@ -48,6 +62,18 @@ app.use((req, res, next) => {
 app.use(userRouter)
 app.use(adminRouter)
 app.use(productRouter)
+
+
+// ==============================PASSPORT
+passport.serializeUser(function (user, done) {
+    done(null, user._id)
+})
+passport.deserializeUser(function (id, done) {
+    User.findById(id, function (err, user) {
+        done(err, user)
+    })
+})
+
 
 
 // ==============================ERRORS
