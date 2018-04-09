@@ -63,14 +63,27 @@ router.post('/product', (req, res) => {
                     }
                     res.render('admin',{msg: 'File upload successfully!'})
                 })
-            },(e)=> {throw new Error('Unable to save to DB')})
+            },(e)  => {throw new Error('Unable to save to DB')})
         }else {
             res.render('admin',{msg:' Remember: Only images!'})
         }
     })
 })
 
-//upload file will use Multer module 
+router.get('/dropdown', (req, res) => {
+    console.log(req.query.name)
+    Product.find({category: req.query.name}).then(data => {
+        res.render('admin',{product: data})
+    }, (e) => {throw new Error('Unable to find Product!')})
+})
 
+router.get('/delete', (req, res) => {
+    Product.findByIdAndRemove(req.query.name).then(data => {
+        fs.unlink(`./public/uploads/${data.image}`, err => {
+            if(err) throw new Error('Unable to delete file!')
+        })
+        res.redirect('admin')
+    }, (e) => {throw new Error('delete product!')})
+})
 
 module.exports = router

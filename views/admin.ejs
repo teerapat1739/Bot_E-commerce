@@ -28,7 +28,8 @@
                     </form>
                     <br>
                     <h4>
-                        <%= typeof msg != "undefined" ? msg : ""%></h4>
+                        <%= typeof msg != "undefined" ? msg : ""%>
+                    </h4>
                     <label for="">ADD PRODUCT</label>
                 </div>
                 <div class="col-12 text-center">
@@ -42,18 +43,57 @@
                             <input type="text" class="form-control" name="des">
                             <label for="">ADD PRICE</label>
                             <input type="text" class="form-control" name="price">
-                            <label for="">ADD IMAGE</label><br>
+                            <label for="">ADD IMAGE</label>
+                            <br>
                             <label class="btn btn-default">
                                 <i class="fa fa-search" aria-hidden="true"></i>
-                                <input type="file" class="form-control" name="image" accept=".jpg, .jpeg, .png, .gif" >
+                                <input type="file" class="form-control" name="image" accept=".jpg, .jpeg, .png, .gif">
                             </label>
                         </div>
-                        <button type="submit" class="btn btn-info">Submit</button><br><br>                   </form>
+                        <button type="submit" class="btn btn-info">Submit</button>
+                        <br>
+                        <br>
+                    </form>
                 </div>
+                <div class="col-12 text-center">
+                    <div class="dropdown show">
+                        <a class="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            FIND AND DELETE PRODUCT
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <% ctg.forEach(category => {%>
+                                <a class="dropdown-item" href="/dropdown?name=<%=category.name%>">
+                                    <%= category.name %>
+                                </a>
+                                <%})%>
+                        </div>
+                    </div>
+                    <p>&nsbp;</p>
+                </div>
+            </div>
+            <div class="row">
+                <% if(typeof product != 'undefined'){product.forEach(item =>{ %>
+                    <div class="col-6 text-center" style="border: 2px solid blue">
+                        <img src="/uploads/<%= item.image %>" alt="" class="img-thumbnail">
+                        <p>
+                            <%= item.name %>
+                        </p>
+                        <span>
+                            <%= item.description %>
+                        </span>
+                        <p>
+                            <%= item.price %> USD</p>
+                        <a href="/delete?name=<%= item._id %>" class="btn btn-danger" role="button">DELETE</a>
+                    </div>
+                    <br>
+                    <br>
+                    <% })} %>
             </div>
     </div>
     <script>
-        if(window.history.replaceState) {
+        if (window.history.replaceState) {
             window.history.replaceState(null, null, window.location.href)
         }
     </script>
