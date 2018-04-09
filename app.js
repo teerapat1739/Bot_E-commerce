@@ -12,6 +12,7 @@ const { mongoose } = require('./db/index')
 // ==============================Routes
 const userRouter = require('./routes/index')
 const adminRouter = require('./routes/admin')
+const productRouter = require('./routes/products')
 
 // ==============================MODELS
 const Category = require('./models/category')
@@ -45,6 +46,7 @@ app.use((req, res, next) => {
 // ==============================USE Routes
 app.use(userRouter)
 app.use(adminRouter)
+app.use(productRouter)
 
 
 // ==============================ERRORS
