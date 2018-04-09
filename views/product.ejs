@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="ico" href="favicon.ico">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>Product</title>
+  </head>
+  <body>
+    <div class="container containerfluid">
+        <% include partials/header.ejs %>
+        <div class="row">
+            <% if(typeof navbar != 'undefined') {navbar.forEach(item => {%>
+                <div class="col-6 text-center" style="border: 2px solid blue;">
+                    <a href="/single?name=<%= item._id %>">
+                        <img src="/uploads/<%= item.image %>" class="img-thumbnail" alt="">
+                    </a><br><br>
+                    <p><%= item.name.toUpperCase() %></p>
+                    <span><%= item.description.toUpperCase() %></span>
+                    <p><%= item.price %>USD</p>
+                </div><br><br>
+            <% })} %>
+        </div>
+
+        <% if (pages > 0) { %>
+            <ul class="pagination text-center">
+                <% if (current == 1) { %>
+                    <li class="disabled"><a>FIRST</a></li>
+                <% } else {%>
+                    <li><a href="/navbar?name=<%= category %>&page=1">FIRST</a></li>
+                <% } %>
+                <% let i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                <% if ( i!= 1) { %>
+                    <li class="disabled"><a>...</a></li>
+                <% } %>
+                <% for (; i <= (Number(current)+4) && i <= pages; i++) { %>
+                    <% if (i == current) { %>
+                        <li class="active"><a><%= i %></a></li>
+                    <% } else { %>
+                        <li for=""><a href="/navbar?name=<%= category %>&page=<%= i %>"><%= i %></a></li>
+                    <% } %>
+                    <% if (i == Number(current) +4 && i < pages) { %>
+                        <li class="disabled"><a>...</a></li>
+                <% }} %>
+                <% if (current == pages) { %>
+                    <li class="disabled"><a>LAST</a></li>
+                <% } else { %>
+                    <li><a href="/navbar?name=<%= category %>&page=<%= pages %>">LAST</a></li>
+                <% } %>
+            </ul>
+        <% } %>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+</body>
+</html>
