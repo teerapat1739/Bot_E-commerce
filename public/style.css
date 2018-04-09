@@ -65,3 +65,8 @@ input[type=text]:focus{
     background-color: #000018;
     color: white;
 }
+.pagination{
+    color: orangered;
+    font-weight: bold;
+    font-size: 4vmin;
+}
