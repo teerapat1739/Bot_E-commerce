@@ -5,6 +5,7 @@ const passport = require('passport')
 const passportTwit = require('../passport/twitter')
 const passportFb = require('../passport/facebook')
 const passportGgl = require('../passport/google')
+const User = require('../models/user')
 
 
 router.get('/', (req, res) => {
@@ -20,6 +21,17 @@ router.get('/login', (req, res) => {
         res.redirect('/')
     } else {
         res.render('login')
+    }
+})
+
+router.get('/logout', (req, res) => {
+    
+    if (req.isAuthenticated()) {
+        User.update({_id: req.user._id}, {$set: {items: []}}).exec()
+        req.logout()
+        res.redirect('/')
+    } else {
+        res.redirect('/')
     }
 })
 
