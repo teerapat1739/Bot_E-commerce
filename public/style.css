@@ -70,3 +70,7 @@ input[type=text]:focus{
     font-weight: bold;
     font-size: 4vmin;
 }
+
+.log{
+    width: 80%;
+}

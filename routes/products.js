@@ -4,6 +4,7 @@ const router = require('express').Router()
 const logger = require('../log')
 const Category = require('../models/category')
 const Product = require('../models/product')
+let temp = undefined
 
 router.get('/navbar', (req, res) => {
     const perPage = 8
@@ -27,9 +28,14 @@ router.get('/navbar', (req, res) => {
 })
 
 router.get('/single', (req, res) => {
-    if (req.isAuthenticated()) {
-        console.log(req.user)
-        res.send('OK')        
+    if (req.isAuthenticated() && temp !== undefined) {
+        Product.findById(temp).then(data => {
+            res.render('single', {one: data})
+            temp=undefined
+        }, (e) => {throw new Error('Unable to find this product!')})
+    } else {
+        temp = req.query.name
+        res.redirect('/login')
     }
 })
 
