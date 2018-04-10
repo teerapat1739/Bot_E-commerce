@@ -26,4 +26,11 @@ router.get('/navbar', (req, res) => {
         }, (e) => {throw new Error('Unable to find this product!')})
 })
 
+router.get('/single', (req, res) => {
+    if (req.isAuthenticated()) {
+        console.log(req.user)
+        res.send('OK')        
+    }
+})
+
 module.exports = router

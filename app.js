@@ -41,7 +41,7 @@ app.use(session({
     secret: 'secret',
     saveUninitialized: false,
     resave: false,
-    store: new MongoStore({ url: 'mongodb://localhost/e-commerce'})
+    store: new MongoStore({ url: 'mongodb://localhost/e-comerce'})
 }))
 app.use(passport.initialize())
 app.use(passport.session())
