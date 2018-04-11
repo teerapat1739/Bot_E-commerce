@@ -74,3 +74,12 @@ input[type=text]:focus{
 .log{
     width: 80%;
 }
+
+#payment{
+    widows: 50vw;
+    height: auto;
+}
+
+#cart {
+    width: 5vw;
+}

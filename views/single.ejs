@@ -24,7 +24,7 @@
                     <p><%= one.name.toUpperCase() %></p>
                     <span><%= one.description.toUpperCase() %></span>
                     <p><%= one.price %> USD</p><br>
-                    <form action="/cart">
+                    <form action="/cart" method="POST">
                         <div class="button-group" role="group">
                             <button type="button" id="minus" class="btn btn-info">-</button>
                             <button type="button" id="result" class="btn">1</button>

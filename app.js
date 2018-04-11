@@ -57,6 +57,22 @@ app.use((req, res, next) => {
     }, (e) => { throw new Error('Unable to find categories!') })
 })
 
+// ==============================SHOPPING CART
+app.use((req, res, next) => {
+    if(req.user) {
+        let total = 0
+        User.findById(req.user._id).then(data => {
+            data.items.forEach(el => total += el.quantity)
+            res.locals.cart = total
+            next()
+        }, (e) => { throw new Error('Unable to find user! ')})
+    } else {
+        res.locals.cart = 0
+        next()
+    }
+  
+})
+
 
 // ==============================USE Routes
 app.use(userRouter)

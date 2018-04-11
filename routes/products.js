@@ -4,6 +4,7 @@ const router = require('express').Router()
 const logger = require('../log')
 const Category = require('../models/category')
 const Product = require('../models/product')
+const User = require('../models/user')
 let temp = undefined
 
 router.get('/navbar', (req, res) => {
@@ -38,5 +39,47 @@ router.get('/single', (req, res) => {
         res.redirect('/login')
     }
 })
+
+router.post('/cart', async (req, res) => {
+    let product = {
+        product_id: req.body.single_id,
+        item: req.body.name,
+        price: req.body.price,
+        image: req.body.image,
+        quantity: req.body.quantity,
+        total_price: req.body.total
+    }
+    console.log(product)
+    
+    try{
+        let a = await User.findById(req.user._id).update({$push: {items: (product)}}).exec()
+        let b = await User.findById(req.user._id)
+        res.redirect('/cart')
+    } catch (err) {
+        throw new Error(err)
+    }
+})
+
+router.get('/cart',(req, res) => {
+    if (req.isAuthenticated()) {
+        User.findById(req.user._id).then(data => {
+
+            console.log(data.items)
+            
+            res.render('cart', {arr: data.items})
+        }, (e) => { throw new Error('Unable to fibnd user!')})
+    } else {
+        res.redirect('/')
+    }
+})
+
+
+router.get('/remove', (req, res) => {
+    console.log('remove')
+    User.findById(req.user._id).update({$pull: {items: {product_id: req.query.name}}}).then(data => {
+        res.redirect('/cart')
+    }, (e) => { throw new Error('Unable to delete from cart!') })
+})
+
 
 module.exports = router
