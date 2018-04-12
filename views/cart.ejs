@@ -19,12 +19,11 @@
           <% let total = 0 %>
           <% arr.forEach(item => {%>
             <% total += item.price*item.quantity %>
-            <div class="col-5 text-center" style="border: 2px solid blue;">
+            <div class="col-7 text-center" style="border: 2px solid blue;">
                 <img src="/uploads/<%= item.image %>" class="thumbnail" alt=""><br>
                 <a href="/remove?name=<%= item.product_id %>" class="btn btn-danger" role="button">DELETE</a>
               </div>
-              <div class="col-1"></div>
-              <div class="col-6 text-left" style="border: 2px solid blue;">
+              <div class="col-5 text-left" style="border: 2px solid blue;">
                 <p><%= item.item.toUpperCase() %></p>
                 <p>ONE:&nbsp;&nbsp;<%= item.price %>&nbsp;USD</p>
                 <p>QUANTITY:&nbsp;&nbsp;<%= item.quantity %>&nbsp;USD</p>
@@ -35,14 +34,43 @@
               <a href="/" class="btn btn-info" role="button">CONTINUE SHOPPING</a>
             </div><br><br>
             <div class="col-12 text-center">
-              <p>TOTAL PRICE:&nbsp;&nbsp;<%= total %>&nbsp;USD</p>
+              <h4>TOTAL PRICE:&nbsp;&nbsp;<%= total %>&nbsp;USD</h4>
             </div><br><br>
             <div class="col-12 text-center" style="background-color:orangered;">
               <img src="payment.png" id="payment" alt="">
             </div><br><br>
+            <div class="col-6 text-center">
+              <form action="/charge" method="POST">
+                <script
+                  src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                  data-key="pk_test_zaSt5n24xD6LhSpPb7fLgXNM"
+                  data-amount="<%= Math.round(total * 100)  %>"
+                  data-name="Demo Site"
+                  data-description="product"
+                  data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                  data-locale="auto">
+                </script>
+                <script>
+                    document.getElementsByClassName('stripe-button-el')[0].style.display = 'none'
+                </script>
+                <input type="hidden" name="amount" value="<%= total %>">
+                <button type="submit" class="btn btn-warning"><i class="fa fa-cc-stripe" aria-hidden="true"></i>&nbsp;&nbsp; Pay with STRIPE</button>
+              </form>
+            </div>
+            <div class="col-6 text-center">
+              <form action="/paypal" method="POST">
+              <input type="hidden" name="amount" value="<%= total %>">
+                <button type="submit" class="btn btn-warning"><i class="fa fa-paypal" aria-hidden="true"></i>&nbsp;&nbsp;Pay with PAYPAL</button>
+            </form>
+            </div>
           <% } %>
       </div>
     </div>
+    <script>
+      if (window.history.replaceState) {
+          window.history.replaceState(null, null, window.location.href)
+      }
+    </script>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

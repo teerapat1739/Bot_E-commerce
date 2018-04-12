@@ -3,3 +3,4 @@ node_modules
 test
 .eslintrc.json
 *.log
+.env

@@ -23,6 +23,8 @@ p,label{
     color:orangered;
     font-size: 4vmin;
     font-weight: bold;
+    width: 38vmin;
+    word-wrap: break-word;
 }
 span{
     color:orangered;
@@ -82,4 +84,10 @@ input[type=text]:focus{
 
 #cart {
     width: 5vw;
+}
+
+h2{
+    color: white;
+    font-size: 8vmin;
+    font-weight: bold;
 }

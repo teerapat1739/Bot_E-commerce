@@ -1,6 +1,7 @@
 'use strict'
 
 const router = require('express').Router()
+const stripe = require('stripe')('sk_test_V5IrPKQYmi6xGEmw9W1M3Wd3')
 const logger = require('../log')
 const Category = require('../models/category')
 const Product = require('../models/product')
@@ -81,5 +82,37 @@ router.get('/remove', (req, res) => {
     }, (e) => { throw new Error('Unable to delete from cart!') })
 })
 
+router.post("/charge", (req, res) => {
+    let amount = req.body.amount * 100
+  
+    stripe.customers.create({
+       email: req.body.stripeEmail,
+      source: req.body.stripeToken
+    })
+    .then(customer =>
+      stripe.charges.create({
+        amount,
+        description: "Sample Charge",
+           currency: "usd",
+           customer: customer.id
+      }))
+    .then(charge => {
+        console.log(charge)
+        let chargeData = {
+            amount: charge.amount / 100,
+            card_email: charge.source.name
+        }
+        console.log("UserId >>>>>>>>>>>>>> "+req.user._id)
+        
+        User.update({_id: req.user._id}, {
+            $set: {items: []},
+            $push: {history: (chargeData)}
+        }).then(data => {
+            console.log(data)
+        }, (e) => { throw new Error('Problems with history!')})
+        res.render('success')
+    }, (e) => { throw new Error('Problems with payment!')})
+  })
+  
 
 module.exports = router

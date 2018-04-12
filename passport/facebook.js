@@ -9,21 +9,24 @@ let check = x => x === undefined ? 'empty' : x
 
 
 passport.use(new FacebookStrategy({
-    clientID: '1678146165603946',
-    clientSecret: '04b740cb02fdb47236b2632d6f463fb6',
-    callbackURL: 'http://localhost:3000/auth/facebook/callback',
+    clientID: '2056309951257572',
+    clientSecret: '407fa8a3b5aa1d2fe4fd1178bbeb8466',
+    callbackURL: 'https://0516a333.ngrok.io/auth/facebook/callback',
     profileFields: ['id', 'displayName', 'photos', 'email']
 },
 function (accessToken, refreshToken, profile, done) {
     User.findOrCreate({
         id: profile.id,
         name: profile.displayName,
-        photo: 'https://graph.facebook.com/'+profile.id+'picture',
+        photo: 'https://graph.facebook.com/'+profile.id+'/picture',
         email: check(profile._json.email),
     }, function (err, user) {
         return done(err, user)
     })
 }
 ))
+
+
+
 
 
